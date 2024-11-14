@@ -19,7 +19,6 @@ def fractional_knapsack(items, capacity):
             total_value += item.value
             capacity -= item.weight
         else:
-           
             fraction = capacity / item.weight
             total_value += item.value * fraction
             capacity = 0 

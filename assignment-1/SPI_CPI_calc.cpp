@@ -26,7 +26,7 @@ void spi_calc(){
     }
 
     //result
-    float SPI=1.0*tot_scr/tot_cred;
+    float SPI=float(tot_scr)/tot_cred;
     cout << fixed << setprecision(2) <<"Your spi is: "<<SPI<<endl;
 }
 
@@ -56,11 +56,13 @@ void cpi_calc(){
 
     //result
     float CPI=1.0*tot_spi/tot_cred;
-    cout << fixed << setprecision(2) <<"Your cpi is: "<<CPI<<endl;}
+    cout << fixed << setprecision(2) <<"Your cpi is: "<<CPI<<endl;
+
+}
 
 int main()
 {
-    // spi_calc();
-    cpi_calc();
+    spi_calc();
+    // cpi_calc();
    return 0;
 }

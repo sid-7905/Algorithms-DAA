@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 
-string findLCS(const string &X, const string &Y) {
+string findLCS(vector<string> &X, vector<string> &Y) {
     int m = X.size(), n = Y.size();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 
@@ -34,24 +34,25 @@ string findLCS(const string &X, const string &Y) {
     return lcs;
 }
 
-
-string longestCommonSubsequence(const vector<string> &grades)
+vector<string> longestCommonSubsequence(vector<vector<string>> &grades)
 {
     if (grades.empty())
-        return "";
+        return {};
+    vector<string> res;
 
-    string lcs = grades[0];
-
-    for (int i = 1; i < grades.size(); i++)
-    {
-        lcs = findLCS(lcs, grades[i]);
+    for (int i = 0; i < grades.size(); i++)
+    {   
+        for(int j = i + 1; j<grades.size(); j++){
+            string lcs = findLCS(grades[i], grades[j]);
+            res.push_back(lcs);
+        }
     }
-    return lcs;
+    return res;
 }
 
 int main()
 {
-    vector<string> grades = {
+    vector<string> arr_str = {
         "ABCDBCBBBCABDDBCBCCCDDBBBCBBFFBCDDCDABABCDBBABABBCBBBBCDABBCCCBCABABABABBBBCDDBC",
         "BCCCABCCCCCCBCCCFFBCCCABABAABBCCABBCBCBCABBBBBAAABAAAAABDDABBCBCABBCCCBBBBABBBCD",
         "ABBBCDFFBCCCBBAABBABBCDDABAABCABCCABABBBBCBBBBCDABBBCCBBDDABABABBCBCFFABBCBCBCDD",
@@ -73,7 +74,26 @@ int main()
         "ABBBABFFCDBBCDBCFFDDBCCCBBDDBCCCCDBBABABAACCDDBBBBCDBCABAADDABDDABCDCDBCABBCBCAB",
         "BCBBCDABABBCCDBCBBABBCBBBCABBBABCCBCABBCCCABBCCDBBBCABCDBBBBBCFFBBAAABBCBCBCABBC"};
 
-    string result = longestCommonSubsequence(grades);
-    cout << "Longest Common Subsequence among student's grades: " << result << endl;
+    vector<vector<string>> grades;
+
+    for(int i = 0;i<arr_str.size(); i++){
+        string s = arr_str[i];
+        vector<string> v;
+        for(int j = 0; j<s.size(); j+=2){
+            v.push_back(s.substr(j,2));
+        }
+        grades.push_back(v);
+    }
+
+
+    vector<string> result = longestCommonSubsequence(grades);
+    int index = 0;
+    for (int i = 0; i < grades.size(); i++)
+    {   
+        for(int j = i + 1; j<grades.size(); j++){
+           cout<<"LCS of the string "<<i+1<<" and "<<j+1<<" is: "<<result[index++]<<endl;
+        }
+    }
+
     return 0;
 }

@@ -51,11 +51,10 @@ Node* buildHuffmanTree(string text) {
         Node* right = pq.top(); pq.pop();
         int sum = left->freq + right->freq;
         Node* sumNode = new Node('\0', sum);
-        sumNode->left = left;
+        sumNode->left = left;  
         sumNode->right = right;
         pq.push(sumNode);
     }
-
     return pq.top();
 }
 

@@ -34,6 +34,5 @@ int main()
     }
 
     cout << "Minimum number of operations needed for chain multiplication is: " << MCM(1, n-1, mat_dim);
-    
     return 0;
 }
